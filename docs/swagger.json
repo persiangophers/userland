@@ -1,0 +1,162 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample swagger for Fiber",
+        "title": "Fiber Example API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "email": "fiber@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/account/login": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Login to your account",
+                "parameters": [
+                    {
+                        "description": "Login to Account",
+                        "name": "account",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request_models.Login"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response_models.Token"
+                        }
+                    }
+                }
+            }
+        },
+        "/account/refresh": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Refresh your tokens",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "refresh_token",
+                        "in": "formData"
+                    }
+                ]
+            }
+        },
+        "/account/signup": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "SignUp to your account",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "avatar",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "name": "birth_date",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "maxLength": 32,
+                        "minLength": 6,
+                        "type": "string",
+                        "name": "email",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "maxLength": 32,
+                        "minLength": 3,
+                        "type": "string",
+                        "name": "first_name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "maxLength": 32,
+                        "minLength": 3,
+                        "type": "string",
+                        "name": "last_name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "maxLength": 32,
+                        "minLength": 6,
+                        "type": "string",
+                        "name": "password",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "privileges",
+                        "in": "formData",
+                        "required": true
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "request_models.Login": {
+            "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "response_models.Token": {
+            "type": "object",
+            "properties": {
+                "access": {
+                    "type": "string"
+                },
+                "refresh": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+GO_BUILD=go build
+GO_CLEAN=go clean
+GO_TEST=go test
+GO_GET=go get
+BINARY_NAME = userland
+MAIN_PATH = ./cmd/userland/main.go
+START_API = start-api
+API_ROUTE_PATH = ./internal/transport/http/fiber/routes.go
+
+go-all: go-test build-swag go-build go-run
+
+build-swag:
+	swag init -g $(API_ROUTE_PATH)
+
+go-build:
+	$(GO_BUILD) -o $(BINARY_NAME) -v $(MAIN_PATH)
+
+go-test:
+	$(GO_TEST) -v ./...
+
+go-clean:
+	$(GO_CLEAN)
+	rm -f $(BINARY_NAME)
+	rm -f $(BINARY_UNIX)
+
+go-run:
+	$(GO_BUILD) -o $(BINARY_NAME) -v $(MAIN_PATH)
+	./$(BINARY_NAME) $(START_API)

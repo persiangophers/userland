@@ -1,0 +1,17 @@
+#This data is important and this file should be included to .gitignore in a real project
+
+jwt:
+  secret: EWS8IhQPH2OosdNfWMq2XqGlvGgOfZMl
+
+log:
+  cmd_log_path: ./logs/cmd.log
+  api_log_path: ./logs/api.log
+  test_log_path: ./logs/test.log
+
+database:
+  username: myUserAdmin
+  password: ali1379
+  host: localhost
+  port: 27017
+  auth_database: admin
+  auth_mechanism: SCRAM-SHA-256

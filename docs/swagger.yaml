@@ -1,0 +1,108 @@
+basePath: /
+definitions:
+  request_models.Login:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  response_models.Token:
+    properties:
+      access:
+        type: string
+      refresh:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: fiber@swagger.io
+    name: API Support
+  description: This is a sample swagger for Fiber
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Fiber Example API
+  version: "1.0"
+paths:
+  /account/login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Login to Account
+        in: body
+        name: account
+        required: true
+        schema:
+          $ref: '#/definitions/request_models.Login'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response_models.Token'
+      summary: Login to your account
+  /account/refresh:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - in: formData
+        name: refresh_token
+        type: string
+      produces:
+      - application/json
+      summary: Refresh your tokens
+  /account/signup:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - in: formData
+        name: avatar
+        type: string
+      - in: formData
+        name: birth_date
+        required: true
+        type: string
+      - in: formData
+        maxLength: 32
+        minLength: 6
+        name: email
+        required: true
+        type: string
+      - in: formData
+        maxLength: 32
+        minLength: 3
+        name: first_name
+        required: true
+        type: string
+      - in: formData
+        maxLength: 32
+        minLength: 3
+        name: last_name
+        required: true
+        type: string
+      - in: formData
+        maxLength: 32
+        minLength: 6
+        name: password
+        required: true
+        type: string
+      - in: formData
+        items:
+          type: string
+        name: privileges
+        required: true
+        type: array
+      produces:
+      - application/json
+      summary: SignUp to your account
+swagger: "2.0"
