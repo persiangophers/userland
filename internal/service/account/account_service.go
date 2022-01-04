@@ -7,16 +7,14 @@ import (
 	"github.com/persiangophers/userland/internal/repository/mongodb"
 	"github.com/persiangophers/userland/internal/service"
 	"github.com/persiangophers/userland/pkg/secure_password"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.uber.org/zap"
 )
 
 type accountService struct {
 	db repository.IUserDb
 }
 
-func NewAccountService(client *mongo.Client, logger *zap.Logger) (service.IAccountService, error) {
-	collection, err := mongodb.NewUserDatabase(client, logger)
+func NewAccountService(client *mongodb.ClientInstance) (service.IAccountService, error) {
+	collection, err := client.NewDatabase("users")
 
 	if err != nil {
 		return nil, err
@@ -28,7 +26,7 @@ func NewAccountService(client *mongo.Client, logger *zap.Logger) (service.IAccou
 
 }
 
-func (service accountService) SignUp(user models.User) (interface{}, error) {
+func (service *accountService) SignUp(user models.User) (interface{}, error) {
 
 	password := secure_password.HashAndSalt([]byte(user.Password))
 	user.Password = password
@@ -40,7 +38,7 @@ func (service accountService) SignUp(user models.User) (interface{}, error) {
 	return id, nil
 }
 
-func (service accountService) Login(email string, password string) (string, error) {
+func (service *accountService) Login(email string, password string) (string, error) {
 
 	user, err := service.db.GetUserByEmail(email)
 
@@ -57,7 +55,7 @@ func (service accountService) Login(email string, password string) (string, erro
 	return user.Id.Hex(), nil
 }
 
-func (service accountService) EmailExist(email string) bool {
+func (service *accountService) EmailExist(email string) bool {
 	_, err := service.db.GetUserByEmail(email)
 
 	if err == nil {

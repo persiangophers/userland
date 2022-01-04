@@ -47,19 +47,19 @@ func Add() error {
 
 	var firstName string = input.GetUserInput("First name", true, false)
 	var lastName string = input.GetUserInput("Last name", true, false)
-	var email string = input.GetUserInput("Email", true, false)
-	var password string = input.GetUserInput("Password", true, true)
-	var birthDate string = input.GetUserInput("Birth Date", true, false)
+	var email string = input.GetUserInput("email", true, false)
+	var password string = input.GetUserInput("secure_password", true, true)
+	var birthDate string = input.GetUserInput("birth date", true, false)
 
-	client, err := mongodb.InitDatabase(cfg)
+	client, err := mongodb.InitClient(cfg, logger)
 
-	defer mongodb.DisconnectDatabase(client, logger)
+	defer client.DisconnectDatabase()
 
 	if err != nil {
 		logger.Error("Unable to connect to database", zap.String("error", err.Error()))
 	}
 
-	service, err := account.NewAccountService(client, logger)
+	service, err := account.NewAccountService(client)
 
 	if err != nil {
 		logger.Error("Unable to load service", zap.String("error", err.Error()))
@@ -91,15 +91,15 @@ func Login() error {
 	var email string = input.GetUserInput("Email", true, false)
 	var password string = input.GetUserInput("Password", true, true)
 
-	client, err := mongodb.InitDatabase(cfg)
+	client, err := mongodb.InitClient(cfg, logger)
 
-	defer mongodb.DisconnectDatabase(client, logger)
+	defer client.DisconnectDatabase()
 
 	if err != nil {
 		logger.Error("Unable to connect to database", zap.String("error", err.Error()))
 	}
 
-	service, err := account.NewAccountService(client, logger)
+	service, err := account.NewAccountService(client)
 
 	if err != nil {
 		logger.Error("Unable to load service", zap.String("error", err.Error()))

@@ -6,8 +6,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func (userDb *userDb) CreateUser(user models.User) (interface{}, error) {
-	result, err := userDb.db.InsertOne(context.TODO(), user)
+func (db *DbInstance) CreateUser(user models.User) (interface{}, error) {
+	result, err := db.collection.InsertOne(context.TODO(), user)
 	if err != nil {
 		return nil, err
 	}
@@ -15,17 +15,17 @@ func (userDb *userDb) CreateUser(user models.User) (interface{}, error) {
 	return result.InsertedID, nil
 }
 
-func (userDb *userDb) UpdateUser(user models.User) (models.User, error) {
+func (db *DbInstance) UpdateUser(user models.User) (models.User, error) {
 	return user, nil
 }
 
-func (userDb *userDb) GetUserById(id string) (models.User, error) {
+func (db *DbInstance) GetUserById(id string) (models.User, error) {
 	return models.User{}, nil
 }
 
-func (userDb *userDb) GetUserByEmail(email string) (models.User, error) {
+func (db *DbInstance) GetUserByEmail(email string) (models.User, error) {
 	var user models.User
-	err := userDb.db.FindOne(context.TODO(), bson.M{
+	err := db.collection.FindOne(context.TODO(), bson.M{
 		"email": email,
 	}).Decode(&user)
 
@@ -36,6 +36,6 @@ func (userDb *userDb) GetUserByEmail(email string) (models.User, error) {
 	return user, nil
 }
 
-func (userDb *userDb) DeleteUser(id string) error {
+func (db *DbInstance) DeleteUser(id string) error {
 	return nil
 }

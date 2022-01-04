@@ -1,19 +1,8 @@
 package mongodb
 
 import (
-	"github.com/persiangophers/userland/internal/config"
 	"github.com/persiangophers/userland/internal/entity/models"
-	"github.com/persiangophers/userland/internal/repository"
-	"github.com/persiangophers/userland/pkg/zap_logger"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.uber.org/zap"
 	"testing"
-)
-
-var (
-	client   *mongo.Client
-	database repository.IUserDb
-	logger   *zap.Logger
 )
 
 var testUsers = []models.User{
@@ -29,20 +18,29 @@ var testUsers = []models.User{
 	},
 }
 
-func initTest() {
-	cfg, _ := config.GetConfig("../../../config.yaml")
-
-	logger, _ = zap_logger.InitLogger("../../../logs/test.log")
-	defer zap_logger.SyncLogger(logger)
-
-	client, _ := InitDatabase(cfg)
-	database, _ = NewUserDatabase(client, logger)
-}
-
 func TestCreateUser(t *testing.T) {
 	initTest()
+	client, err := InitClient(cfg, logger)
 
-	_, err := database.CreateUser(testUsers[0])
+	defer client.DisconnectDatabase()
+
+	if err != nil {
+		t.Errorf("Error initializing mongodb client: %s", err)
+	}
+
+	collection, err := client.NewDatabase("users")
+
+	if err != nil {
+		t.Errorf("Error initializing mongodb client: %s", err)
+	}
+
+	err = collection.DropDatabase()
+
+	if err != nil {
+		t.Errorf("Error dropping database: %s", err)
+	}
+
+	_, err = collection.CreateUser(testUsers[0])
 	if err != nil {
 		t.Errorf("Unable to create the user: %s", err)
 	}

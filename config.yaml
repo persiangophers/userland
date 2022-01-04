@@ -9,6 +9,7 @@ log:
   test_log_path: ./logs/test.log
 
 database:
+  name: userland
   username: myUserAdmin
   password: ali1379
   host: localhost

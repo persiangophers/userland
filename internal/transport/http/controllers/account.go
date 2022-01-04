@@ -29,9 +29,9 @@ func Login(c *fiber.Ctx, logger *zap.Logger, cfg *config.Config) error {
 		return err
 	}
 
-	client, err := mongodb.InitDatabase(cfg)
+	client, err := mongodb.InitClient(cfg, logger)
 
-	defer mongodb.DisconnectDatabase(client, logger)
+	defer client.DisconnectDatabase()
 
 	if err != nil {
 		logger.Error("Unable to connect to database: %s", zap.String("error", err.Error()))
@@ -40,7 +40,7 @@ func Login(c *fiber.Ctx, logger *zap.Logger, cfg *config.Config) error {
 		})
 	}
 
-	service, err := account.NewAccountService(client, logger)
+	service, err := account.NewAccountService(client)
 
 	if err != nil {
 		logger.Error("Unable to get user service", zap.String("error", err.Error()))
@@ -98,9 +98,9 @@ func SignUp(c *fiber.Ctx, logger *zap.Logger, cfg *config.Config) error {
 		return err
 	}
 
-	client, err := mongodb.InitDatabase(cfg)
+	client, err := mongodb.InitClient(cfg, logger)
 
-	defer mongodb.DisconnectDatabase(client, logger)
+	defer client.DisconnectDatabase()
 
 	if err != nil {
 		logger.Error("Unable to connect to database", zap.String("error", err.Error()))
@@ -109,7 +109,7 @@ func SignUp(c *fiber.Ctx, logger *zap.Logger, cfg *config.Config) error {
 		})
 	}
 
-	service, err := account.NewAccountService(client, logger)
+	service, err := account.NewAccountService(client)
 
 	if err != nil {
 		logger.Error("Unable to get user service", zap.String("error", err.Error()))

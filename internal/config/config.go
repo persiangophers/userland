@@ -17,6 +17,7 @@ type (
 	}
 
 	Database struct {
+		Name          string `yaml:"name"`
 		Host          string `yaml:"host"`
 		Port          string `yaml:"port"`
 		AuthDatabase  string `yaml:"auth_database"`
