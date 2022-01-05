@@ -1,0 +1,14 @@
+app:
+  name: name
+  address: :8010
+
+postgres:
+  db_name: test
+  username: erfan
+  password: techerfan
+  host: localhost
+  port: 5432
+  
+account:
+  min_username_length: 4
+  secret: S$!1WET2SG*&98SFSDG#@ERT$&54*
