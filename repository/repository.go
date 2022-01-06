@@ -54,7 +54,7 @@ type (
 		// Password
 		CreatePassword(password entity.Password) error
 		GetPasswordByUUID(uuid string) (entity.Password, error)
-		GetPassword(uuid uint) (entity.Password, error)
+		GetPassword(id uint) (entity.Password, error)
 		DeletePassword(id uint) error
 		HardDeletePassword(id uint) error
 	}
