@@ -3,7 +3,7 @@ package entity
 import "time"
 
 type Phone struct {
-	ID         int
+	ID         uint
 	UUID       string
 	Number     string
 	VerifiedAt *time.Time
