@@ -3,7 +3,7 @@ package repository
 import "github.com/persiangophers/userland/entity"
 
 type (
-	Cash interface {
+	Cache interface {
 		// User
 		SetUser(user entity.User) error
 		GetUser(uuid string) (entity.User, error)
