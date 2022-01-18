@@ -4,7 +4,8 @@ import "time"
 
 type Phone struct {
 	UUID       [16]byte
-	Number     string
+	Code       int
+	Number     int
 	VerifiedAt *time.Time
 	CreatedAt  time.Time
 }
