@@ -3,10 +3,8 @@ package entity
 import "time"
 
 type Phone struct {
-	ID         uint
-	UUID       string
+	UUID       [16]byte
 	Number     string
 	VerifiedAt *time.Time
 	CreatedAt  time.Time
-	DeletedAt  *time.Time
 }

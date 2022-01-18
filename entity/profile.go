@@ -3,13 +3,13 @@ package entity
 import "time"
 
 type Profile struct {
-	ID        uint
-	UUID      string
-	Firstname string
-	Lastname  string
-	BirthDate time.Time
-	AboutMe   string
-	Gender    string
-	Links     []string
-	Avatar    string
+	UUID        [16]byte
+	Firstname   string
+	Lastname    string
+	DisplayName string
+	BirthDate   time.Time
+	AboutMe     string
+	Gender      string
+	Links       []string
+	Avatar      string
 }

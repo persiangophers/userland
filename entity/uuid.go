@@ -3,8 +3,6 @@ package entity
 import "time"
 
 type UUID struct {
-	ID        uint
-	Value     string
+	Value     [16]byte
 	CreatedAt time.Time
-	DeletedAt *time.Time
 }
