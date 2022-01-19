@@ -1,6 +1,6 @@
 package entity
 
 type Password struct {
-	ID    UUID
-	Value string
+	ID       UUID
+	Password string
 }

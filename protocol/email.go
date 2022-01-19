@@ -9,7 +9,4 @@ import (
 type Email interface {
 	Insert(ctx context.Context, id entity.UUID, email string) error
 	Get(ctx context.Context, id entity.UUID) (entity.Email, error)
-
-	SendVerification(ctx context.Context, id entity.UUID) error
-	Verify(ctx context.Context, id entity.UUID, code int) error
 }

@@ -1,6 +1,6 @@
 package entity
 
 type Username struct {
-	ID    UUID
-	Value string
+	ID       UUID
+	Username string
 }
