@@ -1,10 +1,14 @@
 package protocol
 
-import "context"
+import (
+	"context"
+
+	"github.com/persiangophers/userland/entity"
+)
 
 type Password interface {
-	Insert(ctx context.Context, uuid [16]byte, password string) error
-	Update(ctx context.Context, uuid [16]byte, password string) error
+	Insert(ctx context.Context, uuid entity.UUID, password string) error
+	Update(ctx context.Context, uuid entity.UUID, password string) error
 
-	Verify(ctx context.Context, uuid [16]byte, password string) (bool, error)
+	Verify(ctx context.Context, uuid entity.UUID, password string) (bool, error)
 }

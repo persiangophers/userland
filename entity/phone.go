@@ -7,5 +7,4 @@ type Phone struct {
 	Code       int
 	Number     int
 	VerifiedAt *time.Time
-	CreatedAt  time.Time
 }

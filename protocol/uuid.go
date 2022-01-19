@@ -1,8 +1,12 @@
 package protocol
 
-import "context"
+import (
+	"context"
+
+	"github.com/persiangophers/userland/entity"
+)
 
 type UUID interface {
-	Create(ctx context.Context) ([16]byte, error)
-	Delete(ctx context.Context, uuid []byte) error
+	Create(ctx context.Context) (entity.UUID, error)
+	Delete(ctx context.Context, uuid entity.UUID) error
 }

@@ -8,6 +8,6 @@ import (
 
 type Profile interface {
 	CreateProfile(ctx context.Context, profile entity.Profile) error
-	Get(ctx context.Context, uuid [16]byte) (entity.Profile, error)
+	Get(ctx context.Context, uuid entity.UUID) (entity.Profile, error)
 	Update(ctx context.Context, profile entity.Profile) error
 }
