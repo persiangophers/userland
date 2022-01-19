@@ -3,7 +3,7 @@ package entity
 import "time"
 
 type Profile struct {
-	UUID        [16]byte
+	ID          UUID
 	Firstname   string
 	Lastname    string
 	DisplayName string

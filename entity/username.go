@@ -1,6 +1,6 @@
 package entity
 
 type Username struct {
-	UUID  [16]byte
+	ID    UUID
 	Value string
 }

@@ -3,7 +3,7 @@ package entity
 import "time"
 
 type Email struct {
-	UUID       [16]byte
+	ID         UUID
 	Value      string
 	VerifiedAt *time.Time
 }
