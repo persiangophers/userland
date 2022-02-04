@@ -20,5 +20,3 @@ type UserService interface {
 	GetUser(userID [16]byte) (User, error)
 	SetUser(user User) error
 }
-
-type ()

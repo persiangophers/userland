@@ -18,16 +18,11 @@ type (
 		Password
 	}
 
-	InsertPasswordResponse interface {
-		error
-	}
-
 	CheckPasswordRequest interface {
 		Password
 	}
 
 	CheckPasswordResponse interface {
 		Valid() bool
-		error
 	}
 )

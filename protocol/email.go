@@ -5,14 +5,17 @@ type (
 	Email interface {
 		UserID() [16]byte
 		Email() string
-		Verified() bool
+
+		// list of status :
+		// 0 = inactive
+		// 1 = active
+		Status() uint8
 	}
 
 	// EmailService is interface of Email storage layer
 	EmailService interface {
 		Create(email Email) error
 		Get(id [16]byte) (Email, error)
-		GetVerified(id [16]byte) (bool, error)
 	}
 )
 
@@ -24,16 +27,11 @@ type (
 		Email
 	}
 
-	InsertEmailResponse interface {
-		error
-	}
-
 	GetEmailRequest interface {
 		UserID() UserID
 	}
 
 	GetEmailResponse interface {
 		Email
-		error
 	}
 )
