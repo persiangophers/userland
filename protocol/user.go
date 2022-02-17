@@ -1,9 +1,7 @@
 package protocol
 
-type UserID [16]byte
-
 type User interface {
-	ID() UserID
+	ID() [16]byte
 	Email() string
 	Username() string
 	Phone() string
