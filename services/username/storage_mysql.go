@@ -9,14 +9,14 @@ import (
 	"github.com/persiangophers/userland/protocol"
 )
 
-var storage *mysql = &mysql{}
-var _ protocol.UsernameService = storage
+var storage mysql
+var _ protocol.UsernameService = &storage
 
-type mysql struct{}
-
-func (m *mysql) init() {
+func init() {
 	// TODO::: check desire table exist or create it
 }
+
+type mysql struct{}
 
 func (m *mysql) Create(username protocol.Username) (err error) {
 	const query = ""
