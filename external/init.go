@@ -1,0 +1,5 @@
+package external
+
+func Init() {
+
+}
